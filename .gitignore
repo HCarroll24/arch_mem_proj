@@ -1,2 +1,4 @@
 .pdf
 *.o
+memory_latency_profiler
+*.csv

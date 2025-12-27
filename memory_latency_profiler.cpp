@@ -101,7 +101,7 @@ int main() {
         // Calculate latency
         auto duration = end - start;
         auto latency_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
-        double latency = static_cast<double>(latency_ns);
+        double latency = static_cast<double>(latency_ns) / passes;
 
         // Save latency for each working set size to csv
         file << size << "," << latency << "\n";
