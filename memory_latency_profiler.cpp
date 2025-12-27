@@ -88,7 +88,7 @@ int main() {
 
         // Pointer Chase Loop
         uint32_t current = index[0];
-        for (int i = 0; i < iterations; i++) {
+        for (uint32_t i = 0; i < iterations; i++) {
             current = buffer[current].next;
         }
 
