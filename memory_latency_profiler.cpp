@@ -52,7 +52,7 @@ int main() {
     file << "Size,Latency\n";
 
     // Define number of traversals
-    const uint32_t passes = 100;
+    const uint32_t passes = 1;
 
     // Loop to go from 1kb to 1gb by powers of 2
     for (size_t size = 1 << 10; size <= 1 << 30; size = size << 1) {
@@ -101,7 +101,7 @@ int main() {
         // Calculate latency
         auto duration = end - start;
         auto latency_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
-        double latency = static_cast<double>(latency_ns) / passes;
+        double latency = static_cast<double>(latency_ns) / iterations;
 
         // Save latency for each working set size to csv
         file << size << "," << latency << "\n";
