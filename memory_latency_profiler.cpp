@@ -51,6 +51,9 @@ int main() {
     std::ofstream file("output.csv");
     file << "Size,Latency\n";
 
+    // Define number of traversals
+    const uint32_t passes = 100;
+
     // Loop to go from 1kb to 1gb by powers of 2
     for (size_t size = 1 << 10; size <= 1 << 30; size = size << 1) {
         // initialize memory access buffer
@@ -63,6 +66,7 @@ int main() {
         }
 
         uint32_t num_nodes = size / sizeof(PointerChaseNode);
+        uint32_t iterations = num_nodes * passes;
 
         // initialize indexes of the buffer
         std::vector<uint32_t> index(num_nodes);
