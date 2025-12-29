@@ -45,6 +45,9 @@ int main() {
         }
     }
 
+    // measure latency of matrix multiplication in nanoseconds
+    auto start = std::chrono::high_resolution_clock::now();
+
     // Conduct matrix multiplication
     for (int i = 0; i < sqrt_size; i++) {
         for (int j = 0 ; j < sqrt_size; j++) {
@@ -54,6 +57,14 @@ int main() {
             }
         }
     }
+
+    // stop timing
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = end - start;
+    auto latency_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
+
+    // print latency
+    std::cout << "Latency: " << latency_ns << " ns" << std::endl;
 
     // free memory
     free(matrix_a);
