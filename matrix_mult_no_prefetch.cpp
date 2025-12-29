@@ -23,10 +23,13 @@
  * @return 0 if successful
 */
 int main() {
+    const int size = 1 << 30;
+    const int sqrt_size = std::sqrt(size);
+    
     // Set and allocate all matrices)
-    uint8_t* matrix_a = static_cast<uint8_t*>(aligned_alloc(64, 1<<30));
-    uint8_t* matrix_b = static_cast<uint8_t*>(aligned_alloc(64, 1<<30));
-    uint8_t* result = static_cast<uint8_t*>(aligned_alloc(64, 1<<30));
+    uint8_t* matrix_a = static_cast<uint8_t*>(aligned_alloc(64, size));
+    uint8_t* matrix_b = static_cast<uint8_t*>(aligned_alloc(64, size));
+    uint8_t* result = static_cast<uint8_t*>(aligned_alloc(64, size));
     if (matrix_a == nullptr || matrix_b == nullptr || result == nullptr) {
         std::cerr << "Error allocating matrices" << std::endl;
         return 1;
@@ -35,19 +38,19 @@ int main() {
     // populate matrices a and b
     std::mt19937 gen(42);
     std::uniform_int_distribution<uint8_t> dist(0, 100);
-    for (int i = 0; i < std::sqrt(1 << 30); i++) {
-        for (int j = 0; j < std::sqrt(1 << 30); j++) {
-            matrix_a[i * std::sqrt(1 << 30) + j] = dist(gen);
-            matrix_b[i * std::sqrt(1 << 30) + j] = dist(gen);
+    for (int i = 0; i < sqrt_size; i++) {
+        for (int j = 0; j < sqrt_size; j++) {
+            matrix_a[i * sqrt_size + j] = dist(gen);
+            matrix_b[i * sqrt_size + j] = dist(gen);
         }
     }
 
     // Conduct matrix multiplication
-    for (int i = 0; i < std::sqrt(1 << 30); i++) {
-        for (int j = 0 ; j < std::sqrt(1 << 30); j++) {
-            result[i][j] = 0;
-            for(int k = 0; k < std::sqrt(1 << 30); k++) {
-                result[i * std::sqrt(1 << 30) + j] += matrix_a[i * std::sqrt(1 << 30) + k] * matrix_b[k * std::sqrt(1 << 30) + j];
+    for (int i = 0; i < sqrt_size; i++) {
+        for (int j = 0 ; j < sqrt_size; j++) {
+            result[i * sqrt_size + j] = 0;
+            for(int k = 0; k < sqrt_size; k++) {
+                result[i * sqrt_size + j] += matrix_a[i * sqrt_size + k] * matrix_b[k * sqrt_size + j];
             }
         }
     }
