@@ -3,3 +3,4 @@
 memory_latency_profiler
 *.csv
 .vscode
+matrix_mult_no_prefetch
