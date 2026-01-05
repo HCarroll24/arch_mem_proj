@@ -50,7 +50,7 @@ int main() {
     // Conduct matrix multiplication
     for (int i = 0; i < sqrt_size; i++) {
         for (int j = 0 ; j < sqrt_size; j++) {
-            result[i][j] = 0;
+            result[i * sqrt_size + j] = 0;
             for(int k = 0; k < sqrt_size; k++) {
                 result[i * sqrt_size + j] += matrix_a[i * sqrt_size + k] * matrix_b[k * sqrt_size + j];
             }
