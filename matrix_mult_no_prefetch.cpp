@@ -45,7 +45,7 @@ int main() {
     // Conduct matrix multiplication
     for (int i = 0; i < std::sqrt(1 << 30); i++) {
         for (int j = 0 ; j < std::sqrt(1 << 30); j++) {
-            result[i][j] = 0;
+            result[i * std::sqrt(1 << 30) + j] = 0;
             for(int k = 0; k < std::sqrt(1 << 30); k++) {
                 result[i * std::sqrt(1 << 30) + j] += matrix_a[i * std::sqrt(1 << 30) + k] * matrix_b[k * std::sqrt(1 << 30) + j];
             }
