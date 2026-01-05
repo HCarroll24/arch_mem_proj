@@ -26,9 +26,9 @@ int main() {
     const int size = 1 << 30;
     const int sqrt_size = std::sqrt(size);
     // Set and allocate all matrices
-    uint8_t* matrix_a = static_cast<uint8_t*>aligned_alloc(64, size);
-    uint8_t* matrix_b = static_cast<uint8_t*>aligned_alloc(64, size);
-    uint8_t* result = static_cast<uint8_t*>aligned_alloc(64, size);
+    uint8_t* matrix_a = static_cast<uint8_t*>(aligned_alloc(64, size));
+    uint8_t* matrix_b = static_cast<uint8_t*>(aligned_alloc(64, size));
+    uint8_t* result = static_cast<uint8_t*>(aligned_alloc(64, size));
     if (matrix_a == nullptr || matrix_b == nullptr || result == nullptr) {
         std::cerr << "Error allocating matrices" << std::endl;
         return 1;
