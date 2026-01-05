@@ -25,11 +25,10 @@
 int main() {
     const int size = 1 << 30;
     const int sqrt_size = std::sqrt(size);
-    
-    // Set and allocate all matrices)
-    uint8_t* matrix_a = static_cast<uint8_t*>(aligned_alloc(64, size));
-    uint8_t* matrix_b = static_cast<uint8_t*>(aligned_alloc(64, size));
-    uint8_t* result = static_cast<uint8_t*>(aligned_alloc(64, size));
+    // Set and allocate all matrices
+    uint8_t* matrix_a = static_cast<uint8_t*>aligned_alloc(64, size);
+    uint8_t* matrix_b = static_cast<uint8_t*>aligned_alloc(64, size);
+    uint8_t* result = static_cast<uint8_t*>aligned_alloc(64, size);
     if (matrix_a == nullptr || matrix_b == nullptr || result == nullptr) {
         std::cerr << "Error allocating matrices" << std::endl;
         return 1;
@@ -48,7 +47,7 @@ int main() {
     // Conduct matrix multiplication
     for (int i = 0; i < sqrt_size; i++) {
         for (int j = 0 ; j < sqrt_size; j++) {
-            result[i * sqrt_size + j] = 0;
+            result[i][j] = 0;
             for(int k = 0; k < sqrt_size; k++) {
                 result[i * sqrt_size + j] += matrix_a[i * sqrt_size + k] * matrix_b[k * sqrt_size + j];
             }
