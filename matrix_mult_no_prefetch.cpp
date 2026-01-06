@@ -49,6 +49,9 @@ int main() {
 
     // Conduct matrix multiplication
     for (int i = 0; i < sqrt_size; i++) {
+        if (i % 100 == 0) {
+            std::cout << "Processing row " << i << " of " << sqrt_size << std::endl;
+        }
         for (int j = 0 ; j < sqrt_size; j++) {
             result[i * sqrt_size + j] = 0;
             for(int k = 0; k < sqrt_size; k++) {
