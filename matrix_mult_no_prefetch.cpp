@@ -63,7 +63,7 @@ int main() {
     // stop timing
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = end - start;
-    auto latency_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count();
+    auto latency_ns = std::chrono::duration_cast<std::chrono::seconds>(duration).count();
 
     // print latency
     std::cout << "Latency: " << latency_ns << " ns" << std::endl;
