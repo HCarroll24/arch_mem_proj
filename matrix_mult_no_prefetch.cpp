@@ -63,10 +63,24 @@ int main() {
     // stop timing
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = end - start;
-    auto latency_ns = std::chrono::duration_cast<std::chrono::seconds>(duration).count();
+
+    // calculate each time component as remainder after larger units
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(duration).count();
+    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(duration % std::chrono::hours(1)).count();
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(duration % std::chrono::minutes(1)).count();
+    auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration % std::chrono::seconds(1)).count();
+    auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(duration % std::chrono::milliseconds(1)).count();
+    auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(duration % std::chrono::microseconds(1)).count();
 
     // print latency
-    std::cout << "Latency: " << latency_ns << " ns" << std::endl;
+    // formats latency to HH:MM:SS:MS:US:NS
+    std::cout << "Latency: " 
+          << hours << "h:"
+          << minutes << "m:"
+          << seconds << "s:"
+          << milliseconds << "ms:"
+          << microseconds << "us:"
+          << nanoseconds << "ns" << std::endl;
 
     // free memory
     free(matrix_a);
